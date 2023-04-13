@@ -9,13 +9,16 @@ const Approvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState("a");
   const [showSearch, setShowSearch] = useState(false);
   const [showLimit, setShowLimit] = useState(null);
+  const [loading, setLoading] = useState(false);
   const fetchData = async (url) => {
+    setLoading(true);
     try {
       const { data } = await axios.get(url);
       setMeals(data.meals);
     } catch (error) {
       console.log(error);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -32,6 +35,7 @@ const Approvider = ({ children }) => {
         searchTerm,
         setShowLimit,
         showLimit,
+        loading,
       }}
     >
       {children}

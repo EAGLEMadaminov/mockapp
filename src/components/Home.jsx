@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./styles.css";
 import Search from "./Search";
 import { useGlobalContext } from "../context";
+import GetMeals from "./GetMeals";
 
 function Home() {
   const { meals, showSearch, setShowLimit } = useGlobalContext();
@@ -39,21 +40,7 @@ function Home() {
         </div>
       </header>
 
-      {showSearch ? (
-        <div className="section-center">
-          {meals.map((meal) => {
-            const { idMeal, strMeal: title, strMealThumb: image } = meal;
-            return (
-              <article id={idMeal} className="item">
-                <h1>{title}</h1>
-                <img src={image} alt={title} />
-              </article>
-            );
-          })}
-        </div>
-      ) : (
-        ""
-      )}
+      {showSearch ? <GetMeals /> : ""}
     </div>
   );
 }
